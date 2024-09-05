@@ -1,0 +1,58 @@
+name: Rust
+
+# Trigger this workflow on pushes to the main branch and on pull requests to the main branch
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Use the latest Ubuntu version for the CI/CD process
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2  # Check out the code from the repository
+
+    - name: Set up Rust
+      uses: actions-rs/toolchain@v1  # Set up the Rust toolchain
+      with:
+        toolchain: stable  # Use the stable version of Rust
+        override: true  # Override the existing toolchain if any
+
+    - name: Install Dependencies
+      run: |
+        rustup component add clippy  # Install Clippy for linting
+        rustup component add rustfmt  # Install Rustfmt for code formatting
+
+    - name: Run Clippy (Linting)
+      run: cargo clippy -- -D warnings  # Run Clippy to check for code style issues and treat warnings as errors
+
+    - name: Run Tests
+      run: cargo test --verbose  # Run the project's tests with detailed output
+
+    - name: Run Benchmark Tests
+      if: github.event_name == 'push'  # Run benchmark tests only on push events
+      run: cargo bench  # Execute the benchmark tests
+
+    - name: Run Formatting Check
+      run: cargo fmt -- --check  # Verify the code format to ensure consistency
+
+    - name: Cache Cargo Registry
+      uses: actions/cache@v2  # Cache Cargo registry to speed up dependency resolution
+      with:
+        path: ~/.cargo/registry  # Specify the cache path for Cargo registry
+        key: ${{ runner.os }}-cargo-${{ hashFiles('Cargo.lock') }}  # Use the OS and Cargo.lock file as cache keys
+        restore-keys: |
+          ${{ runner.os }}-cargo-
+    
+    - name: Cache Cargo Build
+      uses: actions/cache@v2  # Cache the build output to speed up future builds
+      with:
+        path: target  # Cache the target directory where builds are stored
+        key: ${{ runner.os }}-cargo-build-${{ hashFiles('Cargo.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-cargo-build-
