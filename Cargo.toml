@@ -2,10 +2,10 @@
 name = "zeen_filter"
 version = "0.1.0"
 authors = ["nzengi <zenginureddin1@gmailcom"]
-description = "A fast and optimized bloom filter implementation in Rust."
+description = "A fast and optimized Bloom Filter implementation in Rust."
 homepage = "https://github.com/nzengi"
 repository = "https://github.com/nzengi/zeen_filter"
-keywords = ["bloom, filter", "rust", "performance"]
+keywords = ["rust", "performance"]
 edition = "2021"
 license = "MIT"
 
