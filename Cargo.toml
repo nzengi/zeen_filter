@@ -1,14 +1,14 @@
 [package]
 name = "zeen_filter"
 version = "0.1.0"
-authors = ["nzengi <zenginureddin1@gmailcom"]
-description = "A fast and optimized Bloom Filter implementation in Rust."
-homepage = "https://github.com/nzengi"
-repository = "https://github.com/nzengi/zeen_filter"
-keywords = ["rust", "performance"]
+authors = ["nzengi <zenginureddin1@gmail.com>"]
 edition = "2021"
+description = "A fast and optimized Bloom Filter implementation in Rust."
+documentation = "https://docs.rs/zeen_filter"  # Documentation link
+repository = "https://github.com/nzengi/zeen_filter"
+homepage = "https://github.com/nzengi"
 license = "MIT"
-
+keywords = ["bloom-filter", "rust", "performance"]
 
 [dependencies]
 rand = "0.8"
