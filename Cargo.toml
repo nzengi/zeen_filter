@@ -7,6 +7,7 @@ homepage = "https://github.com/nzengi"
 repository = "https://github.com/nzengi/zeen_filter"
 keywords = ["bloom filter", "rust", "performance"]
 edition = "2021"
+license = "MIT"
 
 
 [dependencies]
